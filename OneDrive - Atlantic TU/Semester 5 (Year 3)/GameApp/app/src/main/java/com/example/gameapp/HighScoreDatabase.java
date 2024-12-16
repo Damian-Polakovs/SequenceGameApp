@@ -1,24 +1,23 @@
 package com.example.gameapp;
 
-import android.os.Bundle;
+import android.content.Context;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+@Database(entities = {HighScore.class}, version = 1)
+public abstract class HighScoreDatabase extends RoomDatabase {
+    private static HighScoreDatabase instance;
 
-public class HighScoreDatabase extends AppCompatActivity {
+    public abstract HighScoreDao highScoreDao();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_high_score_database);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    public static synchronized HighScoreDatabase getInstance(Context context) {
+        if (instance == null) {
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                            HighScoreDatabase.class, "high_score_database")
+                    .fallbackToDestructiveMigration()
+                    .build();
+        }
+        return instance;
     }
 }

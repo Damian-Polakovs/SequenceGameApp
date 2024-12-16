@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,33 +12,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GameApp"
         tools:targetApi="31">
-        <activity
-            android:name=".HiScore"
-            android:exported="false" />
-        <activity
-            android:name=".GameOver"
-            android:exported="false" />
-        <activity
-            android:name=".PlayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HighScoreDatabase"
-            android:exported="false" />
-        <activity
-            android:name=".HighScore"
-            android:exported="false" />
-        <activity
-            android:name=".LearningSequenceActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".DisplaySequence"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".PlayActivity"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".GameOver"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".HiScore"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

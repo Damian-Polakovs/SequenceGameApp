@@ -1,24 +1,53 @@
 package com.example.gameapp;
 
-import android.os.Bundle;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+@Entity(tableName = "high_scores")
+public class HighScore {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
-public class HighScore extends AppCompatActivity {
+    private String playerName;
+    private int score;
+
+    public HighScore(String playerName, int score) {
+        this.playerName = playerName;
+        this.score = score;
+    }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_high_score);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    public String toString() {
+        return "HighScore{" +
+                "id=" + id +
+                ", playerName='" + playerName + '\'' +
+                ", score=" + score +
+                '}';
     }
 }
